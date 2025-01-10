@@ -1,14 +1,13 @@
 import os
 import requests
+import webbrowser
+import unicodedata
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 from flask import Flask, request, jsonify
-import webbrowser
-import unicodedata
-
 
 class PapelariaChatbot:
     def __init__(self):
@@ -24,13 +23,7 @@ class PapelariaChatbot:
         self.whatsapp_number = "5515997523463" 
 
     def gerar_resposta(self, mensagem):
-        """
-        Envia uma mensagem para a API Groq e retorna a resposta.
-
-        :param mensagem: Mensagem enviada pelo usuário.
-        :return: Resposta gerada pela API.
-       """
-      
+            
         headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json"
@@ -107,7 +100,7 @@ class PapelariaChatbot:
         msg["Subject"] = "Lista de Preços - Papelaria Central Parque"
 
         # Corpo do e-mail
-        corpo = "Segue em anexo a lista de preços dos materiais escolares."
+        corpo = "Segue em anexo a lista de preços dos materiais escolares da Papelaria Central Parque."
         msg.attach(MIMEText(corpo, "plain"))
 
         # Anexando o PDF
@@ -159,14 +152,14 @@ class PapelariaChatbot:
         Exibe o menu de opções para o usuário.
         """
         print("\nBem-vindo ao Chatbot da Roxinha!")
-        print("Escolha uma das opções disponíveis:")
-        print("1 - Perguntar algo para a Roxinha")
+        print("\nEscolha uma das opções disponíveis:")
+        print("\n1 - Perguntar algo para a Roxinha")
         print("2 - Baixar lista de preços de material escolar (PDF)")
         print("3 - Enviar lista de preços por e-mail")
         print("4 - Falar pelo WhatsApp")
-        print("5 - Ir Site da papelaria")
+        print("5 - Ir Site da Papelaria Central Parque")
         print("6 - Como chegar na Papelaria Central Parque")
-        print("7 - A Roxinha Sugere uma lista de material escolar")
+        print("7 - A Roxinha sugere uma lista de material escolar")
         print("0 - Sair")
 
     def executar_opcao(self, opcao):
@@ -193,7 +186,7 @@ class PapelariaChatbot:
             partida = input("Digite o endereço do ponto de partida:")
             return self.generate_google_maps_link(partida)
         elif opcao == "7":
-           escola = input("Digite qual a série do aluno:")
+           escola = input("Digite qual a série do aluno ex 1ª grau, pré-escola:")
            return self.gerar_sugestao(escola)
             
         elif opcao == "0":
