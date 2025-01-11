@@ -145,6 +145,7 @@ class PapelariaChatbot:
         f"{base_url}{origem}/{destination}"
         # Gera o link
         link = f"{base_url}{origem}/{destination}"
+        webbrowser.open(link)
         return f"Acesse sua rota: {link}"
       
     def exibir_menu(self):
